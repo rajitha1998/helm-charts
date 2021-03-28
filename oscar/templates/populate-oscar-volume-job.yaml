@@ -15,10 +15,10 @@ spec:
         - name: WATCHDOG_VERSION
           value: {{ .Values.volume.watchdogVersion | quote }}
         volumeMounts:
-        - name: oscar-vol
+        - name: lightning-vol
           mountPath: /data
       restartPolicy: Never
       volumes:
-      - name: oscar-vol
+      - name: lightning-vol
         persistentVolumeClaim:
-          claimName: oscar-pvc
+          claimName: faas-pvc

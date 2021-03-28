@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oscar
+  name: lightningfaas
   labels:
-    app: oscar
+    app: lightningfaas
 spec:
   selector:
     matchLabels:
-      app: oscar
+      app: lightningfaas
   replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
-        app: oscar
+        app: lightningfaas
     spec:
-      serviceAccountName: oscar-sa
+      serviceAccountName: lightningfaas-sa
       containers:
-      - name: oscar
+      - name: lightningfaas
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         securityContext:
@@ -41,17 +41,17 @@ spec:
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
         env:
-        - name: OSCAR_SERVICE_PORT
+        - name: LIGHTNING_SERVICE_PORT
           value: {{ .Values.port | quote }}
-        - name: OSCAR_NAME
-          value: oscar
-        - name: OSCAR_NAMESPACE
-          value: {{ .Release.Namespace | quote }}
-        - name: OSCAR_SERVICES_NAMESPACE
+        - name: LIGHTNING_NAME
+          value: lightningfaas
+        - name: LIGTHNING_NAMESPACE
+          value: lightningfaas
+        - name: LIGHTNING_SERVICES_NAMESPACE
           value: {{ .Values.servicesNamespace | quote }}
-        - name: OSCAR_USERNAME
+        - name: LIGHTNING_USERNAME
           value: {{ .Values.authUser | quote }}
-        - name: OSCAR_PASSWORD
+        - name: LIGHTNING_PASSWORD
           value: {{ .Values.authPass | quote}}
         - name: SERVERLESS_BACKEND
           value: {{ .Values.serverlessBackend | lower | quote }}

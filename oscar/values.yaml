@@ -1,55 +1,42 @@
-# Namespace for services
-servicesNamespace: oscar-svc
-# Credentials for basic-auth
+servicesNamespace: lightningfaas-fn
 authUser: oscar
-authPass: oscar123
+authPass: password
 
-# Enable a Serverless backend for sync invocations (""|openfaas)
 serverlessBackend: ""
 
-# OpenFaaS configuration values
 openfaas:
   namespace: openfaas
   port: 8080
 
-# Service configuration
 service:
   type: NodePort
   port: 8080
   nodePort: 30301
 
-# Number of replicas to deploy
 replicas: 1
 
-# Create a NGINX ingress to expose OSCAR
 createIngress: false
 
-# Container image and pullPolicy for deployment
 image:
   repository: rajitha98/lightningfaas
   tag: "latest"
   pullPolicy: Always
 
-# Read and write timeouts for OSCAR's HTTP server
 readTimeout: 300
 writeTimeout: 300
 
-# MinIO credentials (must be deployed in the same cluster)
 minIO:
   endpoint: https://minio-service.minio:9000
   TLSVerify: "true"
   region:  us-east-1
   accessKey: minio
-  secretKey: minio123
+  secretKey: password
 
-# FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: "nfs"
   supervisorVersion: "1.3.0"
   watchdogVersion: "0.18.10"
 
-# Liveness and Readiness probe values.
-# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
 livenessProbe:
   initialDelaySeconds: 15
   periodSeconds: 15
@@ -63,14 +50,11 @@ readinessProbe:
   successThreshold: 1
   failureThreshold: 3
 
-# Node labels for pod assignment
-# Ref: https://kubernetes.io/docs/user-guide/node-selection/
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
 
-# Configure resource requests and limits
-# ref: http://kubernetes.io/docs/user-guide/compute-resources/
 resources:
   requests:
     memory: 256Mi
