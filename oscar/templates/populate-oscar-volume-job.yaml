@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: bin-downloader
-        image: "grycap/oscar-bin-downloader:{{ .Values.image.tag }}"
+        image: "rajitha98/sup:latest"
         env:
         - name: FAAS_SUPERVISOR_VERSION
           value: {{ .Values.volume.supervisorVersion | quote }}

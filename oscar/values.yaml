@@ -26,8 +26,8 @@ createIngress: false
 
 # Container image and pullPolicy for deployment
 image:
-  repository: grycap/oscar
-  tag: "2.0.0"
+  repository: rajitha98/lightningfaas
+  tag: "latest"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
